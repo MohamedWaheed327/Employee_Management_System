@@ -141,12 +141,6 @@ public class EmployeesController : Controller {
          await Pre(vm);
          return View(vm);
       }
-      if (await _db.Employees.AnyAsync(e => e.Email == vm.Email)) {
-         ModelState.AddModelError("Email", "This email is already in use");
-         await Pre(vm);
-         return View(vm);
-      }
-
       if (vm.Image != null && vm.Image.Length > 2 * 1024 * 1024) {
          ModelState.AddModelError("Image", "Image size cannot exceed 2 MB.");
          await Pre(vm);
