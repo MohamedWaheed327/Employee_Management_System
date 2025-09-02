@@ -15,7 +15,7 @@ if (!app.Environment.IsDevelopment()) {
 app.UseHttpsRedirection();//Mohammed Ramadan
 app.UseRouting();//Waheed
 
-app.UseAuthorization();
+app.UseAuthorization(); // Abo Adel 
 
 app.MapStaticAssets();
 
