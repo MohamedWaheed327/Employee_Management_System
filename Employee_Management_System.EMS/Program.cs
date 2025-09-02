@@ -17,7 +17,7 @@ app.UseRouting();//Waheed
 
 app.UseAuthorization(); // Abo Adel 
 
-app.MapStaticAssets();
+app.MapStaticAssets(); // Thaer
 
 app.MapControllerRoute(
     name: "default",
