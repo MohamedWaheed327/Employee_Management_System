@@ -1,181 +1,178 @@
 @model EmployeeListVm
 @{
-	ViewData["Title"] = "Employees";
-	int totalPages = (int)Math.Ceiling((double)Model.TotalCount / Model.PageSize);
+   ViewData["Title"] = "Employees";
+   int totalPages = (int)Math.Ceiling((double)Model.TotalCount / Model.PageSize);
 }
 
 <div class="container mt-4">
 
-	<!-- Header -->
-	<div class="d-flex justify-content-between align-items-center mb-4">
-		<h2 class="fw-bold text-info">
-			<i class="bi bi-people-fill me-2"></i> Employees
-		</h2>
-		<a class="btn btn-success shadow-sm" asp-action="Create">
-			<i class="bi bi-person-plus"></i> Add Employee
-		</a>
-	</div>
+   <!-- Header -->
+   <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold text-info">
+         <i class="bi bi-people-fill me-2"></i> Employees
+      </h2>
+      <a class="btn btn-success shadow-sm" asp-action="Create">
+         <i class="bi bi-person-plus"></i> Add Employee
+      </a>
+   </div>
 
-	<!-- Active Filters -->
-	<div class="mb-3">
-		@if (!string.IsNullOrEmpty(Model.Search))
-		{
-			<span class="badge bg-info text-dark me-2">
-				<i class="bi bi-search me-1"></i> "@Model.Search"
-			</span>
-		}
-		@if (Model.DepartmentId.HasValue)
-		{
-			<span class="badge bg-warning text-dark me-2">
-				<i class="bi bi-building me-1"></i>
-				@Model.Departments?.FirstOrDefault(d => d.Value == Model.DepartmentId.ToString())?.Text
-			</span>
-		}
-		@if (Model.JobTitleId.HasValue)
-		{
-			<span class="badge bg-purple text-white me-2">
-				<i class="bi bi-briefcase me-1"></i>
-				@Model.JobTitles?.FirstOrDefault(j => j.Value == Model.JobTitleId.ToString())?.Text
-			</span>
-		}
-	</div>
+   <!-- Active Filters -->
+   <div class="mb-3">
+      @if (!string.IsNullOrEmpty(Model.Search))
+      {
+         <span class="badge bg-info text-dark me-2">
+            <i class="bi bi-search me-1"></i> "@Model.Search"
+         </span>
+      }
+      @if (Model.DepartmentId.HasValue)
+      {
+         <span class="badge bg-warning text-dark me-2">
+            <i class="bi bi-building me-1"></i>
+            @Model.Departments?.FirstOrDefault(d => d.Value == Model.DepartmentId.ToString())?.Text
+         </span>
+      }
+      @if (Model.JobTitleId.HasValue)
+      {
+         <span class="badge bg-purple text-white me-2">
+            <i class="bi bi-briefcase me-1"></i>
+            @Model.JobTitles?.FirstOrDefault(j => j.Value == Model.JobTitleId.ToString())?.Text
+         </span>
+      }
+   </div>
 
-	<!-- Filters Accordion -->
-	<div class="accordion mb-4 shadow-sm rounded" id="filterAccordion">
-		<div class="accordion-item border-0">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed bg-light fw-semibold text-info" type="button"
-					data-bs-toggle="collapse" data-bs-target="#filters">
-					<i class="bi bi-funnel-fill me-2 text-info"></i> Filters
-				</button>
-			</h2>
-			<div id="filters" class="accordion-collapse collapse">
-				<div class="accordion-body">
-					<form method="get" class="row g-3 align-items-end">
-						<div class="col-md-3">
-							<label class="form-label fw-semibold text-secondary">Search</label>
-							<input class="form-control border-info" name="search" value="@Model.Search"
-								placeholder="Name or Email" />
-						</div>
-						<div class="col-md-3">
-							<label class="form-label fw-semibold text-secondary">Department</label>
-							@Html.DropDownList("departmentId", Model.Departments!, "All Departments",
-							new { @class = "form-select border-warning", @value = Model.DepartmentId })
-						</div>
-						<div class="col-md-3">
-							<label class="form-label fw-semibold text-secondary">Job Title</label>
-							@Html.DropDownList("jobTitleId", Model.JobTitles!, "All Job Titles",
-														new { @class = "form-select border-purple", @value = Model.JobTitleId })
-						</div>
-						<div class="col-md-2">
-							<label class="form-label fw-semibold text-secondary">Page Size</label>
-							<select name="pageSize" class="form-select border-info" onchange="this.form.submit()">
-								@foreach (var size in new[] { 10, 20, 50 })
-								{
-									<option value="@size" selected="@(size == Model.PageSize)">@size</option>
-								}
-							</select>
-						</div>
-						<div class="col-md-1 d-grid">
-							<button class="btn btn-info text-white" type="submit">
-								<i class="bi bi-search"></i>
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+   <!-- Filters Accordion -->
+   <div class="accordion mb-4 shadow-sm rounded" id="filterAccordion">
+      <div class="accordion-item border-0">
+         <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-light fw-semibold text-info" type="button"
+               data-bs-toggle="collapse" data-bs-target="#filters">
+               <i class="bi bi-funnel-fill me-2 text-info"></i> Filters
+            </button>
+         </h2>
+         <div id="filters" class="accordion-collapse collapse">
+            <div class="accordion-body">
+               <form method="get" class="row g-3 align-items-end">
+                  <div class="col-md-3">
+                     <label class="form-label fw-semibold text-secondary">Search</label>
+                     <input class="form-control border-info" name="search" value="@Model.Search"
+                        placeholder="Name or Email" />
+                  </div>
+                  <div class="col-md-3">
+                     <label class="form-label fw-semibold text-secondary">Department</label>
+                     @Html.DropDownList("departmentId", Model.Departments!, "All Departments",
+                     new { @class = "form-select border-warning", @value = Model.DepartmentId })
+                  </div>
+                  <div class="col-md-3">
+                     <label class="form-label fw-semibold text-secondary">Job Title</label>
+                     @Html.DropDownList("jobTitleId", Model.JobTitles!, "All Job Titles",
+                                          new { @class = "form-select border-purple", @value = Model.JobTitleId })
+                  </div>
+                  <div class="col-md-2">
+                     <label class="form-label fw-semibold text-secondary">Page Size</label>
+                     <select name="pageSize" class="form-select border-info" onchange="this.form.submit()">
+                        @foreach (var size in new[] { 10, 20, 50 })
+                        {
+                           <option value="@size" selected="@(size == Model.PageSize)">@size</option>
+                        }
+                     </select>
+                  </div>
+                  <div class="col-md-1 d-grid">
+                     <button class="btn btn-info text-white" type="submit">
+                        <i class="bi bi-search"></i>
+                     </button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
 
-	<!-- Employees Table -->
-	<div class="table-responsive shadow-sm rounded">
-		<table class="table table-hover align-middle">
-			<thead class="sticky-top" style="background-color:#e0f7fa;">
-				<tr>
-					<th>Image</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Department</th>
-					<th>Job Title</th>
-					<th>Hire Date</th>
-					<th>Salary</th>
-					<th class="text-end">Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var e in Model.Items)
-				{
-					<tr>
-						<td>
-							@if (!string.IsNullOrEmpty(e.ProfileImagePath))
-							{
-								<img src="@e.ProfileImagePath" alt="img" width="48" height="48"
-									class="rounded-circle border shadow-sm" />
-							}
-						</td>
-						<td class="fw-semibold text-dark">@e.FullName</td>
-						<td class="text-muted">@e.Email</td>
-						<td><span class="badge bg-warning text-dark">@e.department?.Name</span></td>
-						<td><span class="badge bg-purple text-white">@e.job?.Title</span></td>
-						<td class="text-secondary">@e.HireDate.ToString("yyyy-MM-dd")</td>
-						<td class="fw-bold text-success">@e.Salary.ToString("C")</td>
-						<td class="text-end">
-							<div class="btn-group">
-								<a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@e.Id"
-									title="Details">
-									<i class="bi bi-eye"></i>
-								</a>
-								<a class="btn btn-sm btn-outline-purple" asp-action="Edit" asp-route-id="@e.Id"
-									title="Edit">
-									<i class="bi bi-pencil"></i>
-								</a>
-								<a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@e.Id"
-									title="Delete">
-									<i class="bi bi-trash"></i>
-								</a>
-							</div>
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
+   <!-- Employees Table -->
+   <div class="table-responsive shadow-sm rounded">
+      <table class="table table-hover align-middle">
+         <thead class="sticky-top" style="background-color:#e0f7fa;">
+            <tr>
+               <th>Image</th>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Department</th>
+               <th>Job Title</th>
+               <th>Hire Date</th>
+               <th>Salary</th>
+               <th class="text-end">Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach (var e in Model.Items)
+            {
+               <tr>
+                  <td>
+                     @if (!string.IsNullOrEmpty(e.ProfileImagePath))
+                     {
+                        <img src="@e.ProfileImagePath" alt="img" width="48" height="48"
+                           class="rounded-circle border shadow-sm" />
+                     }
+                  </td>
+                  <td class="fw-semibold text-dark">@e.FullName</td>
+                  <td class="text-muted">@e.Email</td>
+                  <td><span class="badge bg-warning text-dark">@e.department?.Name</span></td>
+                  <td><span class="badge bg-purple text-white">@e.job?.Title</span></td>
+                  <td class="text-secondary">@e.HireDate.ToString("yyyy-MM-dd")</td>
+                  <td class="fw-bold text-success">@e.Salary.ToString("C")</td>
+                  <td class="text-end">
+                     <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@e.Id" title="Details">
+                           <i class="bi bi-eye"></i>
+                        </a>
+                        <a class="btn btn-sm btn-outline-purple" asp-action="Edit" asp-route-id="@e.Id" title="Edit">
+                           <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@e.Id" title="Delete">
+                           <i class="bi bi-trash"></i>
+                        </a>
+                     </div>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   </div>
 
-	<!-- Pagination -->
-	@if (totalPages > 1)
-	{
-		<nav class="mt-4">
-			<ul class="pagination justify-content-center">
-				@for (int i = 1; i <= totalPages; i++)
-				{
-					<li class="page-item @(i == Model.Page ? "active" : "")">
-						<a class="page-link text-info fw-bold" asp-action="Index" asp-route-search="@Model.Search"
-							asp-route-departmentId="@Model.DepartmentId" asp-route-jobTitleId="@Model.JobTitleId"
-							asp-route-page="@i" asp-route-pageSize="@Model.PageSize">@i</a>
-					</li>
-				}
-			</ul>
-		</nav>
-	}
+   <!-- Pagination -->
+   @if (totalPages > 1)
+   {
+      <nav class="mt-4">
+         <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= totalPages; i++)
+            {
+               <li class="page-item @(i == Model.Page ? "active" : "")">
+                  <a class="page-link text-info fw-bold" asp-action="Index" asp-route-search="@Model.Search"
+                     asp-route-departmentId="@Model.DepartmentId" asp-route-jobTitleId="@Model.JobTitleId" asp-route-page="@i"
+                     asp-route-pageSize="@Model.PageSize">@i</a>
+               </li>
+            }
+         </ul>
+      </nav>
+   }
 </div>
 
 <!-- Extra style for purple theme -->
 <style>
-	.bg-purple {
-		background-color: #9c27b0 !important;
-	}
+   .bg-purple {
+      background-color: #9c27b0 !important;
+   }
 
-	.border-purple {
-		border-color: #9c27b0 !important;
-	}
+   .border-purple {
+      border-color: #9c27b0 !important;
+   }
 
-	.btn-outline-purple {
-		color: #9c27b0;
-		border-color: #9c27b0;
-	}
+   .btn-outline-purple {
+      color: #9c27b0;
+      border-color: #9c27b0;
+   }
 
-	.btn-outline-purple:hover {
-		background-color: #9c27b0;
-		color: #fff;
-	}
+   .btn-outline-purple:hover {
+      background-color: #9c27b0;
+      color: #fff;
+   }
 </style>

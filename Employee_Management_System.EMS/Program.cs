@@ -32,3 +32,13 @@ using (var scope = app.Services.CreateScope()) {
 
 //Add-Migration InitialCreate
 //Update-Database
+/*
+   New update commands
+
+    dotnet ef database drop
+    dotnet ef migrations remove
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update  
+
+    and there is file dummy data
+*/
