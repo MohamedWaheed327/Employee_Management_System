@@ -99,18 +99,22 @@
                <th>Job Title</th>
                <th>Hire Date</th>
                <th>Salary</th>
-               <th class="text-end">Actions</th>
+               <th class="text-end">Action</th>
             </tr>
          </thead>
          <tbody>
             @foreach (var e in Model.Items)
             {
                <tr>
-                  <td>
+                  <td class="text-center">
                      @if (!string.IsNullOrEmpty(e.ProfileImagePath))
                      {
-                        <img src="@e.ProfileImagePath" alt="img" width="48" height="48"
+                        <img src="@e.ProfileImagePath" alt="Profile" width="48" height="48"
                            class="rounded-circle border shadow-sm" />
+                     }
+                     else
+                     {
+                        <i class="bi bi-person-circle text-muted" style="font-size: 2rem;"></i>
                      }
                   </td>
                   <td class="fw-semibold text-dark">@e.FullName</td>
@@ -121,14 +125,10 @@
                   <td class="fw-bold text-success">@e.Salary.ToString("C")</td>
                   <td class="text-end">
                      <div class="btn-group">
-                        <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@e.Id" title="Details">
-                           <i class="bi bi-eye"></i>
-                        </a>
-                        <a class="btn btn-sm btn-outline-purple" asp-action="Edit" asp-route-id="@e.Id" title="Edit">
-                           <i class="bi bi-pencil"></i>
-                        </a>
-                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@e.Id" title="Delete">
-                           <i class="bi bi-trash"></i>
+                        <!-- Details Button -->
+                        <a class="btn btn-sm btn-outline-info shadow-sm rounded-pill px-3" asp-action="Details"
+                           asp-route-id="@e.Id" title="View Details">
+                           <i class="bi bi-eye me-1"></i> View
                         </a>
                      </div>
                   </td>
