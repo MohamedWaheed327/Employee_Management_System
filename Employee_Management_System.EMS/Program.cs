@@ -12,7 +12,7 @@ if (!app.Environment.IsDevelopment()) {
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();//Mohammed
+app.UseHttpsRedirection();//Adell
 app.UseRouting();
 
 app.UseAuthorization();
