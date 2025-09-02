@@ -9,10 +9,10 @@ public class EMS_DBcontext : DbContext {
     DbSet<Job> jobs;
     DbSet<Department> departments;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        // optionsBuilder.UseSqlServer(@"Server=MOHAMED-WAHEED; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;");
-        optionsBuilder.UseSqlServer(@"Server=.; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;");
-    }
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+    //     // optionsBuilder.UseSqlServer(@"Server=MOHAMED-WAHEED; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;");
+    //     optionsBuilder.UseSqlServer(@"Server=.; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;");
+    // }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<Employee>()
