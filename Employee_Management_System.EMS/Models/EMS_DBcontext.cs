@@ -1,10 +1,11 @@
-
+﻿
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Employee_Management_System.EMS.Models;
 
 public class EMS_DBcontext : DbContext {
+    public EMS_DBcontext(DbContextOptions<EMS_DBcontext> options) : base(options) { }
     DbSet<Employee> employees;
     DbSet<Job> jobs;
     DbSet<Department> departments;
