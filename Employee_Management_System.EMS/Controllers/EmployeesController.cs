@@ -18,6 +18,7 @@ public class EmployeesController : Controller {
           .Include(e => e.job)
           .AsQueryable();
 
+
       if (!string.IsNullOrWhiteSpace(search)) {
          search = search.Trim();
          query = query.Where(e => e.FullName.Contains(search) || e.Email.Contains(search));
@@ -25,6 +26,7 @@ public class EmployeesController : Controller {
       if (departmentId.HasValue) {
          query = query.Where(e => e.Department_id == departmentId.Value);
       }
+
       if (jobTitleId.HasValue) {
          query = query.Where(e => e.Job_id == jobTitleId.Value);
       }
@@ -84,6 +86,9 @@ public class EmployeesController : Controller {
          return View(vm);
       }
 
+      var dept_query = _db.JobTitles.AsQueryable();
+      vm.DepartmentId = await dept_query.Where(j => j.Id == vm.JobTitleId).Select(d => d.DepartmentId).FirstOrDefaultAsync();
+
       var emp = new Employee {
          FullName = vm.FullName,
          Email = vm.Email,
@@ -133,6 +138,13 @@ public class EmployeesController : Controller {
 
       var e = await _db.Employees.FindAsync(id);
       if (e == null) return NotFound();
+
+
+      var dept_query = _db.JobTitles.AsQueryable();
+      vm.DepartmentId = await dept_query
+                                       .Where(j => j.Id == vm.JobTitleId)
+                                       .Select(d => d.DepartmentId)
+                                       .FirstOrDefaultAsync();
 
       e.FullName = vm.FullName;
       e.Email = vm.Email;

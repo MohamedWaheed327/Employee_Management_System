@@ -17,7 +17,7 @@
 
    <!-- Form -->
    <form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data"
-         class="row g-3 shadow-sm p-5 rounded bg-white border border-2 border-light">
+      class="row g-3 shadow-sm p-5 rounded bg-white border border-2 border-light">
 
       <input type="hidden" asp-for="Id" />
 
@@ -57,18 +57,18 @@
       </div>
 
       <!-- Department -->
-      <div class="col-md-6">
+      @* <div class="col-md-6">
          <label asp-for="DepartmentId" class="form-label fw-semibold text-secondary">Department</label>
          @Html.DropDownListFor(m => m.DepartmentId, Model.Departments!, "-- Select --",
                new { @class = "form-select border-warning shadow-sm" })
          <span asp-validation-for="DepartmentId" class="text-danger small"></span>
-      </div>
+      </div> *@
 
       <!-- Job Title -->
       <div class="col-md-6">
          <label asp-for="JobTitleId" class="form-label fw-semibold text-secondary">Job Title</label>
          @Html.DropDownListFor(m => m.JobTitleId, Model.JobTitles!, "-- Select --",
-               new { @class = "form-select border-purple shadow-sm" })
+         new { @class = "form-select border-purple shadow-sm" })
          <span asp-validation-for="JobTitleId" class="text-danger small"></span>
       </div>
 
@@ -76,7 +76,7 @@
       <div class="col-md-6">
          <label asp-for="Image" class="form-label fw-semibold text-secondary">Profile Image</label>
          <input asp-for="Image" class="form-control border-info shadow-sm" type="file"
-                accept=".jpg,.jpeg,.png,.gif,.webp" />
+            accept=".jpg,.jpeg,.png,.gif,.webp" />
          <span asp-validation-for="Image" class="text-danger small"></span>
 
          @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
@@ -84,7 +84,7 @@
             <div class="mt-3">
                <p class="fw-semibold text-muted mb-2">Current Image:</p>
                <img src="@Model.ExistingImagePath" alt="Profile" width="120"
-                    class="img-thumbnail shadow-sm rounded-circle border border-info" />
+                  class="img-thumbnail shadow-sm rounded-circle border border-info" />
             </div>
          }
       </div>
@@ -92,8 +92,8 @@
       <!-- Buttons -->
       <div class="col-12 d-flex justify-content-end gap-2 mt-4">
          <button class="btn btn-success shadow-sm" type="submit">
-                <i class="bi bi-save"></i> Save Changes
-            </button>
+            <i class="bi bi-save"></i> Save Changes
+         </button>
          <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" asp-action="Index">
             <i class="bi bi-x-circle me-1"></i> Cancel
          </a>
@@ -109,13 +109,16 @@
    .bg-purple {
       background-color: #9c27b0 !important;
    }
+
    .border-purple {
       border-color: #9c27b0 !important;
    }
+
    .btn-purple {
       background-color: #9c27b0;
       color: #fff;
    }
+
    .btn-purple:hover {
       background-color: #7b1fa2;
       color: #fff;
