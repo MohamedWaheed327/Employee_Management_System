@@ -15,6 +15,8 @@ public class EMS_DBcontext : DbContext {
     //     optionsBuilder.UseSqlServer(@"Server=.; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;");
     // }
 
+    public EMS_DBcontext(DbContextOptions<EMS_DBcontext> options) : base(options) { }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<Employee>()
         .HasOne(e => e.department)
