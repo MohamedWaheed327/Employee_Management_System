@@ -1,6 +1,7 @@
 ﻿using Employee_Management_System.EMS.Data;
 using Employee_Management_System.EMS.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,3 +28,6 @@ using (var scope = app.Services.CreateScope()) {
     dotnet ef migrations add InitialCreate
     dotnet ef database update
 */
+
+//Add-Migration InitialCreate
+//Update-Database
