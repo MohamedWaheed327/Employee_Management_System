@@ -19,7 +19,7 @@ public class Employee {
     [ForeignKey(nameof(department))]
     public int Department_id { get; set; }
 
-    public Job job { get; set; }
+    public Job? job { get; set; }
     [ForeignKey(nameof(job))]
     public int Job_id { get; set; }
 }

@@ -25,6 +25,12 @@ public class AppDbContext : DbContext {
             .WithMany(j => j.employees)
             .HasForeignKey(e => e.Job_id)
             .OnDelete(DeleteBehavior.Restrict);
+
+
+        modelBuilder.Entity<Job>()
+            .HasOne(j => j.department)
+            .WithMany(d => d.jobs)
+            .HasForeignKey(j => j.DepartmentId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
-

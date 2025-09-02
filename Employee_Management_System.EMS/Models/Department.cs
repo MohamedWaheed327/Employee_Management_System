@@ -9,4 +9,6 @@ public class Department {
     // [AllowedValues("IT", "HR")]
     public string? Name { get; set; }
     public List<Employee>? employees { get; set; }
+
+    public List<Job>? jobs { get; set; }
 }

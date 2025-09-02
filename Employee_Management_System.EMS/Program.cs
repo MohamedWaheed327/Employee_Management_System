@@ -25,6 +25,7 @@ using (var scope = app.Services.CreateScope()) {
     await DbSeeder.SeedAsync(db);
 }
 /*
+    dotnet ef migrations remove
     dotnet ef migrations add InitialCreate
     dotnet ef database update
 */
