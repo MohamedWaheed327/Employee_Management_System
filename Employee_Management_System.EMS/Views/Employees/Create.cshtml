@@ -68,13 +68,13 @@
       <div class="col-md-6">
          <label asp-for="DepartmentId" class="form-label fw-semibold text-secondary">Department</label>
          @Html.DropDownListFor(m => m.DepartmentId, Model.Departments!, "-- Select --",
-         new { @class = "form-select border-warning shadow-sm", id = "DepartmentId" })
+                  new { @class = "form-select border-warning shadow-sm", id = "DepartmentId" })
          <span asp-validation-for="DepartmentId" class="text-danger"></span>
       </div>
 
       <div class="col-md-6">
          <label asp-for="JobTitleId" class="form-label fw-semibold text-secondary">Job Title</label>
-         @Html.DropDownListFor(m => m.JobTitleId, Enumerable.Empty<SelectListItem>(), "-- Select --",
+         @Html.DropDownListFor(m => m.JobTitleId, Model.JobTitles!, "-- Select --",
                   new { @class = "form-select border-purple shadow-sm", id = "JobTitleId" })
          <span asp-validation-for="JobTitleId" class="text-danger"></span>
       </div>
