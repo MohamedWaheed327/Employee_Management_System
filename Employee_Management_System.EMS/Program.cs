@@ -13,7 +13,7 @@ if (!app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();//Mohammed Ramadan
-app.UseRouting();
+app.UseRouting();//Waheed
 
 app.UseAuthorization();
 
