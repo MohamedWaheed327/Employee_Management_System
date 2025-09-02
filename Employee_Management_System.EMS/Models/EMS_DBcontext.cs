@@ -10,7 +10,7 @@ public class EMS_DBcontext : DbContext {
     DbSet<Department> departments;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        optionsBuilder.UseSqlServer(@"Server=MOHAMMED-WAHEED; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;");
+        optionsBuilder.UseSqlServer(@"Server=MOHAMED-WAHEED; Database=ITI_EMS; Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
