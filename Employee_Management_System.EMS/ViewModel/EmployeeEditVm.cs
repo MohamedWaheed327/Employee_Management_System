@@ -1,23 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace Employee_Management_System.EMS.Models;
-public class EmployeeEditVm {
+namespace Employee_Management_System.EMS.Models
+{
+    public class EmployeeEditVm
+    {
         public int? Id { get; set; }
 
         [Required, StringLength(150)]
         public string FullName { get; set; } = string.Empty;
 
-        [Required, EmailAddress, StringLength(200)]
+        [Required, StringLength(200)]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.com$", ErrorMessage = "Email must contain @ and end with .com")]
         public string Email { get; set; } = string.Empty;
 
-        [Phone, StringLength(30)]
+        [Required]
+        [RegularExpression(@"^01\d{9}$", ErrorMessage = "Phone number must start with 01 and be 11 digits")]
         public string? PhoneNumber { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
+        [HireDateRangeValidation(ErrorMessage = "Hire date must be between 2000-01-01 and 2030-12-31")]
         public DateTime HireDate { get; set; } = DateTime.UtcNow.Date;
 
-        [Range(0, 1_000_000)]
+        [Required]
+        [Range(5000, 50000, ErrorMessage = "Salary must be between 5000 and 50000")]
         public decimal Salary { get; set; }
 
         [Required]
@@ -33,3 +41,18 @@ public class EmployeeEditVm {
         public SelectList? JobTitles { get; set; }
     }
 
+    public class HireDateRangeValidation : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
+        {
+            if (value is DateTime hireDate)
+            {
+                if (hireDate >= new DateTime(2000, 1, 1) && hireDate <= new DateTime(2030, 12, 31))
+                {
+                    return ValidationResult.Success!;
+                }
+            }
+            return new ValidationResult(ErrorMessage);
+        }
+    }
+}
