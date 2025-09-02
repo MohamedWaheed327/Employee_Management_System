@@ -1,4 +1,5 @@
 bin
 obj
-Migrations
+Migrations/
 .vs
+appsettings.json
