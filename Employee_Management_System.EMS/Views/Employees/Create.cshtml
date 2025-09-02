@@ -60,6 +60,24 @@
                   new { @class = "form-select border-purple shadow-sm", id = "JobTitleId" })
          <span asp-validation-for="JobTitleId" class="text-danger"></span>
       </div>
+      <div class="col-md-3">
+         <label asp-for="Salary" class="form-label fw-semibold text-secondary"></label>
+         <input asp-for="Salary" class="form-control border-info shadow-sm" placeholder="Enter salary" />
+         <span asp-validation-for="Salary" class="text-danger"></span>
+      </div>
+      <div class="col-md-6">
+         <label asp-for="DepartmentId" class="form-label fw-semibold text-secondary">Department</label>
+         @Html.DropDownListFor(m => m.DepartmentId, Model.Departments!, "-- Select --",
+         new { @class = "form-select border-warning shadow-sm", id = "DepartmentId" })
+         <span asp-validation-for="DepartmentId" class="text-danger"></span>
+      </div>
+
+      <div class="col-md-6">
+         <label asp-for="JobTitleId" class="form-label fw-semibold text-secondary">Job Title</label>
+         @Html.DropDownListFor(m => m.JobTitleId, Enumerable.Empty<SelectListItem>(), "-- Select --",
+                  new { @class = "form-select border-purple shadow-sm", id = "JobTitleId" })
+         <span asp-validation-for="JobTitleId" class="text-danger"></span>
+      </div>
 
       <div class="col-md-6">
          <label asp-for="Image" class="form-label fw-semibold text-secondary">Profile Image</label>
