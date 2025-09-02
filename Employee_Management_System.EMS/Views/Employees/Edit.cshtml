@@ -37,11 +37,13 @@
         <span asp-validation-for="Salary" class="text-danger"></span>
     </div>
 
+    @*
     <div class="col-md-6">
         <label asp-for="DepartmentId" class="form-label">Department</label>
         @Html.DropDownListFor(m => m.DepartmentId, Model.Departments!, "-- Select --", new { @class = "form-select" })
         <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
+    *@
 
     <div class="col-md-6">
         <label asp-for="JobTitleId" class="form-label">Job Title</label>
