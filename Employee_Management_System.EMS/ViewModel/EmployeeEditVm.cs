@@ -16,7 +16,7 @@ namespace Employee_Management_System.EMS.Models
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        [RegularExpression(@"^01\d{9}$", ErrorMessage = "Phone number must start with 01 and be 11 digits long")]
+        [RegularExpression(@"^01\d{9}$", ErrorMessage = "Phone number must start with 01 and be 11 digits")]
         public string? PhoneNumber { get; set; }
 
         [Required]
