@@ -12,5 +12,6 @@ public class Employee {
     public DateTime HireDate { get; set; }
     public decimal Salary { get; set; }
     public string? ProfileImagePath { get; set; }
-    public Department Department { get; set; }
+    public Department department { get; set; }
+    public Job job { get; set; }
 }
