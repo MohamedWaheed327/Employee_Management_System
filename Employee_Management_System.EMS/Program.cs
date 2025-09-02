@@ -1,5 +1,4 @@
 ﻿
-using Employee_Management_System.EMS.Migrations;
 using Employee_Management_System.EMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
