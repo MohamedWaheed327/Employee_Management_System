@@ -61,6 +61,10 @@ public class EmployeesController : Controller {
       return View(e);
    }
 
+   private async Task Pre(EmployeeEditVm vm) {
+      vm.Departments = new SelectList(await _db.Departments.ToListAsync(), "Id", "Name", vm.DepartmentId);
+      vm.JobTitles = new SelectList(await _db.JobTitles.ToListAsync(), "Id", "Title", vm.JobTitleId);
+   }
    public async Task<IActionResult> Create() {
       var vm = new EmployeeEditVm {
          Departments = new SelectList(await _db.Departments.OrderBy(d => d.Name).ToListAsync(), "Id", "Name"),
@@ -73,16 +77,19 @@ public class EmployeesController : Controller {
    [ValidateAntiForgeryToken]
    public async Task<IActionResult> Create(EmployeeEditVm vm) {
       if (!ModelState.IsValid) {
-         vm.Departments = new SelectList(await _db.Departments.ToListAsync(), "Id", "Name", vm.DepartmentId);
-         vm.JobTitles = new SelectList(await _db.JobTitles.ToListAsync(), "Id", "Title", vm.JobTitleId);
+         await Pre(vm);
          return View(vm);
       }
 
       // Unique Email Validation
       if (await _db.Employees.AnyAsync(e => e.Email == vm.Email)) {
          ModelState.AddModelError("Email", "This email is already in use");
-         vm.Departments = new SelectList(await _db.Departments.ToListAsync(), "Id", "Name", vm.DepartmentId);
-         vm.JobTitles = new SelectList(await _db.JobTitles.ToListAsync(), "Id", "Title", vm.JobTitleId);
+         await Pre(vm);
+         return View(vm);
+      }
+      if (vm.Image != null && vm.Image.Length > 2 * 1024 * 1024) {
+         ModelState.AddModelError("Image", "Image size cannot exceed 2 MB.");
+         await Pre(vm);
          return View(vm);
       }
 
@@ -131,8 +138,18 @@ public class EmployeesController : Controller {
       if (id != vm.Id) return BadRequest();
 
       if (!ModelState.IsValid) {
-         vm.Departments = new SelectList(await _db.Departments.ToListAsync(), "Id", "Name", vm.DepartmentId);
-         vm.JobTitles = new SelectList(await _db.JobTitles.ToListAsync(), "Id", "Title", vm.JobTitleId);
+         await Pre(vm);
+         return View(vm);
+      }
+      if (await _db.Employees.AnyAsync(e => e.Email == vm.Email)) {
+         ModelState.AddModelError("Email", "This email is already in use");
+         await Pre(vm);
+         return View(vm);
+      }
+
+      if (vm.Image != null && vm.Image.Length > 2 * 1024 * 1024) {
+         ModelState.AddModelError("Image", "Image size cannot exceed 2 MB.");
+         await Pre(vm);
          return View(vm);
       }
 
